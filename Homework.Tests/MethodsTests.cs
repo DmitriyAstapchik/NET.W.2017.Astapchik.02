@@ -8,55 +8,68 @@ namespace Homework.Tests
     public class MethodsTests
     {
         [TestMethod]
-        public void InsertNumber_22_44_2_4_Result52()
+        public void InsertNumber_15_15_0_0_Result15()
         {
-            int firstNumber = 22;
-            int secondNumber = 44;
-            byte i = 2;
-            byte j = 4;
+            int firstNumber = 15;
+            int secondNumber = 15;
+            byte start = 0;
+            byte end = 0;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            var actual = InsertNumber(firstNumber, secondNumber, start, end);
 
-            Assert.AreEqual(52, secondNumber);
+            Assert.AreEqual(15, actual);
         }
 
         [TestMethod]
-        public void InsertNumber_99_9999_0_31_Result99()
+        public void InsertNumber_8_15_0_0_Result9()
         {
-            int firstNumber = 99;
-            int secondNumber = 9999;
-            byte i = 0;
-            byte j = 31;
+            int firstNumber = 8;
+            int secondNumber = 15;
+            byte start = 0;
+            byte end = 0;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            var actual = InsertNumber(firstNumber, secondNumber, start, end);
 
-            Assert.AreEqual(99, secondNumber);
+            Assert.AreEqual(9, actual);
         }
 
         [TestMethod]
-        public void InsertNumber_Minus55555_55555_30_31_ResultLessThanZero()
+        public void InsertNumber_8_15_3_8_Result120()
         {
-            int firstNumber = -55555;
-            int secondNumber = 55555;
-            byte i = 30;
-            byte j = 31;
+            int firstNumber = 8;
+            int secondNumber = 15;
+            byte start = 3;
+            byte end = 8;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            var actual = InsertNumber(firstNumber, secondNumber, start, end);
 
-            Assert.IsTrue(secondNumber < 0);
+            Assert.AreEqual(120, actual);
         }
 
         [TestMethod]
-        public void InsertNumber_4444_Minus4444_0_30_ResultNotEqualsMinus4444()
+        public void InsertNumber_4444_1_31_31_ResultLessThanZero()
         {
             int firstNumber = 4444;
-            int secondNumber = -4444;
-            byte i = 0;
-            byte j = 30;
+            int secondNumber = 1;
+            byte start = 31;
+            byte end = 31;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            var actual = InsertNumber(firstNumber,  secondNumber, start, end);
 
-            Assert.AreNotEqual(-4444, secondNumber);
+            Assert.IsTrue(actual < 0);
+        }
+
+        [TestMethod]
+        public void InsertNumber_999999999_0_0_31_Result0()
+        {
+            int firstNumber = 999999999;
+            int secondNumber = 0;
+            byte start = 0;
+            byte end = 31;
+
+            var actual = InsertNumber(firstNumber, secondNumber, start, end);
+
+            Assert.AreEqual(0, actual);
         }
 
         [TestMethod]
@@ -65,10 +78,10 @@ namespace Homework.Tests
         {
             int firstNumber = 123;
             int secondNumber = 456;
-            byte i = 3;
-            byte j = 33;
+            byte start = 3;
+            byte end = 33;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            InsertNumber(firstNumber, secondNumber, start, end);
         }
 
         [TestMethod]
@@ -77,10 +90,10 @@ namespace Homework.Tests
         {
             int firstNumber = 200;
             int secondNumber = 400;
-            byte i = 40;
-            byte j = 20;
+            byte start = 40;
+            byte end = 20;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            InsertNumber(firstNumber,  secondNumber, start, end);
         }
 
         [TestMethod]
@@ -89,22 +102,10 @@ namespace Homework.Tests
         {
             int firstNumber = 22;
             int secondNumber = 2;
-            byte i = 22;
-            byte j = 2;
+            byte start = 22;
+            byte end = 2;
 
-            InsertNumber(firstNumber, ref secondNumber, i, j);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void InsertNumber_868_886688_15_15_ArgumentException()
-        {
-            int firstNumber = 868;
-            int secondNumber = 886688;
-            byte i = 15;
-            byte j = 15;
-
-            InsertNumber(firstNumber, ref secondNumber, i, j);
+            InsertNumber(firstNumber,  secondNumber, start, end);
         }
     }
 }

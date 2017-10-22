@@ -8,37 +8,36 @@ namespace Homework.NUnit.Tests
     public class MethodsTests
     {
         #region InsertNumber tests
-        [TestCase(22, 44, 2, 4, ExpectedResult = 52)]
-        [TestCase(222, 444, 0, 22, ExpectedResult = 222)]
-        [TestCase(3, 12, 2, 3, ExpectedResult = 0)]
-        public int InsertNumberTestResult(int first, int second, byte i, byte j)
+        [TestCase(56, 56, 3, 5, ExpectedResult = 0)]
+        [TestCase(127, 8, 2, 4, ExpectedResult = 99)]
+        [TestCase(9689, 777, 0, 20, ExpectedResult = 777)]
+        public int InsertNumberTestResult(int first, int second, byte start, byte end)
         {
-            InsertNumber(first, ref second, i, j);
-            return second;
+            return InsertNumber(first,  second, start, end);
         }
 
-        [TestCase(-11, 11, 25, 31)]
-        [TestCase(-156463, 798427, 10, 31)]
-        public void InsertNumberTestAssertLess(int first, int second, byte i, byte j)
+        [TestCase(1111, 3, 31, 31)]
+        [TestCase(123456, 127, 26, 31)]
+        public void InsertNumberTestAssertLess(int first, int second, byte start, byte end)
         {
-            InsertNumber(first, ref second, i, j);
-            Assert.Less(second, 0);
+            var result = InsertNumber(first,  second, start, end);
+            Assert.Less(result, 0);
         }
 
 
-        [TestCase(525, -39857, 15, 31)]
-        [TestCase(-156463, 798427, 20, 30)]
-        public void InsertNumberTestAssertGreater(int first, int second, byte i, byte j)
+        [TestCase(-1239525, 9847, 15, 31)]
+        [TestCase(156463, -798427, 2, 22)]
+        public void InsertNumberTestAssertGreater(int first, int second, byte start, byte end)
         {
-            InsertNumber(first, ref second, i, j);
-            Assert.Greater(second, 0);
+            var result = InsertNumber(first,  second, start, end);
+            Assert.Greater(result, 0);
         }
 
         [TestCase(22, 222, 22, 222)]
         [TestCase(-34144, 23032, 133, 135)]
         public void InsertNumberTestArgumentOutOfRangeException(int first, int second, byte i, byte j)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => InsertNumber(first, ref second, i, j));
+            Assert.Throws<ArgumentOutOfRangeException>(() => InsertNumber(first, second, i, j));
         }
         #endregion
 

@@ -4,38 +4,42 @@ using System.Diagnostics;
 
 namespace Homework
 {
+    /// <summary>
+    /// Class contains methods working with numbers
+    /// </summary>
     public static class Methods
     {
         /// <summary>
-        /// Takes bits <paramref name="i"/> to <paramref name="j"/> from <paramref name="firstNumber"/> and inserts them into <paramref name="secondNumber"/> to the same positions.
+        /// Takes bits from <paramref name="secondNumber"/> and inserts them into <paramref name="firstNumber"/> to positions from <paramref name="startPosition"/> to <paramref name="endPosition"/>.
         /// </summary>
-        /// <param name="firstNumber">32-bit number, from which bits are being copied</param>
-        /// <param name="secondNumber">32-bit number, into which bits are being inserted</param>
-        /// <param name="i">start position of copied bits</param>
-        /// <param name="j">end position of copied bits</param>
-        public static void InsertNumber(int firstNumber, ref int secondNumber, byte i, byte j)
+        /// <param name="firstNumber">32-bit number, which accepts insertion</param>
+        /// <param name="secondNumber">32-bit number, which is being inserted</param>
+        /// <param name="startPosition"><paramref name="firstNumber"/> position from which insertion starts</param>
+        /// <param name="endPosition"><paramref name="firstNumber"/> position at which insertion ends</param>
+        /// <returns>result of insertion</returns>
+        public static int InsertNumber(int firstNumber, int secondNumber, byte startPosition, byte endPosition)
         {
             #region arguments validation
-            if (i > 31 || j > 31)
+            if (endPosition > 31 || startPosition > 31)
             {
                 throw new ArgumentOutOfRangeException("Maximum of bit position is 31.");
             }
 
-            if (i >= j)
+            if (startPosition > endPosition)
             {
-                throw new ArgumentException("Bit positions condition is i < j.");
+                throw new ArgumentException("Start position cannot be greater than end position.");
             }
             #endregion
 
             var firstNumberBits = new BitArray(new int[] { firstNumber });
             var secondNumberBits = new BitArray(new int[] { secondNumber });
-            for (int index = i; index <= j; index++)
+            for (int index1 = startPosition, index2 = 0; index1 <= endPosition; index1++, index2++)
             {
-                secondNumberBits.Set(index, firstNumberBits.Get(index));
+                firstNumberBits.Set(index1, secondNumberBits.Get(index2));
             }
             var result = new int[1];
-            secondNumberBits.CopyTo(result, 0);
-            secondNumber = result[0];
+            firstNumberBits.CopyTo(result, 0);
+            return result[0];
         }
 
         /// <summary>
