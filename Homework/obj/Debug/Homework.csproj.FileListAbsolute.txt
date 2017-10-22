@@ -1,0 +1,13 @@
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\InsertNumber\bin\Debug\InsertNumber.dll
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\InsertNumber\bin\Debug\InsertNumber.pdb
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\InsertNumber\obj\Debug\Homework.csproj.CoreCompileInputs.cache
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\InsertNumber\obj\Debug\InsertNumber.dll
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\InsertNumber\obj\Debug\InsertNumber.pdb
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\InsertNumber\obj\Debug\Homework.csprojResolveAssemblyReference.cache
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\obj\Debug\Homework.csprojResolveAssemblyReference.cache
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\obj\Debug\Homework.csproj.CoreCompileInputs.cache
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\bin\Debug\Homework.xml
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\bin\Debug\Homework.dll
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\bin\Debug\Homework.pdb
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\obj\Debug\Homework.dll
+E:\studying\programming\EPAM training\Day 2\NET.W.2017.Astapchik.02\Homework\obj\Debug\Homework.pdb

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Homework</name>
+    </assembly>
+    <members>
+        <member name="M:Homework.Methods.InsertNumber(System.Int32,System.Int32@,System.Byte,System.Byte)">
+            <summary>
+            Takes bits <paramref name="i"/> to <paramref name="j"/> from <paramref name="firstNumber"/> and inserts them into <paramref name="secondNumber"/> to the same positions.
+            </summary>
+            <param name="firstNumber">32-bit number, from which bits are being copied</param>
+            <param name="secondNumber">32-bit number, into which bits are being inserted</param>
+            <param name="i">start position of copied bits</param>
+            <param name="j">end position of copied bits</param>
+        </member>
+        <member name="M:Homework.Methods.FindNextBiggerNumber(System.UInt32)">
+            <summary>
+            Finds the nearest number greater than <paramref name="number"/>, which consists of its digits.
+            </summary>
+            <param name="number">any positive integer number</param>
+            <returns>the nearest number greater than <paramref name="number"/>, which consists of its digits or zero if there is no such number</returns>
+        </member>
+        <member name="M:Homework.Methods.FindNextBiggerNumber(System.UInt32,System.Int64@)">
+            <summary>
+            Finds the nearest number greater than <paramref name="number"/>, which consists of its digits and counts ticks during performance.
+            </summary>
+            <param name="number">any positive integer number</param>
+            <param name="ticks">elapsed ticks</param>
+            <returns>the nearest number greater than <paramref name="number"/>, which consists of its digits or zero if there is no such number</returns>
+        </member>
+        <member name="M:Homework.Methods.FilterDigit(System.Byte,System.Int32[])">
+            <summary>
+            Filters list of <paramref name="numbers"/> on condition on containing specific <paramref name="digit"/>.
+            </summary>
+            <param name="digit">filtering digit</param>
+            <param name="numbers">list of integers to filter</param>
+            <returns>array of filtered numbers</returns>
+        </member>
+        <member name="M:Homework.Methods.FindNthRoot(System.Double,System.Byte,System.Double)">
+            <summary>
+            Calculates square root with <paramref name="power"/> and specific <paramref name="precision"/> of <paramref name="number"/> using Newton's method.
+            </summary>
+            <param name="number">number to calculate its square root</param>
+            <param name="power">square root power</param>
+            <param name="precision">calculative precision</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
