@@ -11,6 +11,10 @@ namespace Homework.NUnit.Tests
         [TestCase(56, 56, 3, 5, ExpectedResult = 0)]
         [TestCase(127, 8, 2, 4, ExpectedResult = 99)]
         [TestCase(9689, 777, 0, 20, ExpectedResult = 777)]
+        [TestCase(135, 502, 0, 31, ExpectedResult = 502)]
+        [TestCase(25, 52, 10, 20, ExpectedResult = 53273)]
+        [TestCase(int.MinValue, int.MaxValue, 0, 30, ExpectedResult = -1)]
+        [TestCase(-2130129, -99, 0, 31, ExpectedResult = -99)]
         public int InsertNumberTestResult(int first, int second, byte start, byte end)
         {
             return InsertNumber(first,  second, start, end);

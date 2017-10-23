@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics;
 
 namespace Homework
@@ -19,10 +18,12 @@ namespace Homework
         /// <returns>result of insertion</returns>
         public static int InsertNumber(int firstNumber, int secondNumber, byte startPosition, byte endPosition)
         {
+            const byte BITS = sizeof(int) * 8;
+
             #region arguments validation
-            if (endPosition > 31 || startPosition > 31)
+            if (endPosition >= BITS || startPosition > BITS)
             {
-                throw new ArgumentOutOfRangeException("Maximum of bit position is 31.");
+                throw new ArgumentOutOfRangeException($"Number of bit position must be less than {BITS}.");
             }
 
             if (startPosition > endPosition)
@@ -31,15 +32,13 @@ namespace Homework
             }
             #endregion
 
-            var firstNumberBits = new BitArray(new int[] { firstNumber });
-            var secondNumberBits = new BitArray(new int[] { secondNumber });
-            for (int index1 = startPosition, index2 = 0; index1 <= endPosition; index1++, index2++)
-            {
-                firstNumberBits.Set(index1, secondNumberBits.Get(index2));
-            }
-            var result = new int[1];
-            firstNumberBits.CopyTo(result, 0);
-            return result[0];
+            var tail = (firstNumber << BITS - startPosition >> 1 & ~(1 << (BITS - 1))) >> (BITS - 1) - startPosition;
+
+            firstNumber = endPosition == BITS - 1 ? 0 : firstNumber >> endPosition + 1 << endPosition + 1;
+
+            secondNumber = endPosition < BITS - 1 ? (secondNumber << (BITS - 1) - (endPosition - startPosition) >> 1 & ~(1 << (BITS - 1))) >> (BITS - 2) - endPosition : secondNumber << (BITS - 1) - (endPosition - startPosition);
+
+            return firstNumber | secondNumber | tail;
         }
 
         /// <summary>
