@@ -9,14 +9,14 @@ namespace Homework
     public static class Methods
     {
         /// <summary>
-        /// Takes bits from <paramref name="secondNumber"/> and inserts them into <paramref name="firstNumber"/> to positions from <paramref name="startPosition"/> to <paramref name="endPosition"/>.
+        /// Takes bits from <paramref name="number2"/> and inserts them into <paramref name="number1"/> to positions from <paramref name="startPosition"/> to <paramref name="endPosition"/>.
         /// </summary>
-        /// <param name="firstNumber">32-bit number, which accepts insertion</param>
-        /// <param name="secondNumber">32-bit number, which is being inserted</param>
-        /// <param name="startPosition"><paramref name="firstNumber"/> position from which insertion starts</param>
-        /// <param name="endPosition"><paramref name="firstNumber"/> position at which insertion ends</param>
+        /// <param name="number1">32-bit number, which accepts insertion</param>
+        /// <param name="number2">32-bit number, which is being inserted</param>
+        /// <param name="startPosition"><paramref name="number1"/> position from which insertion starts</param>
+        /// <param name="endPosition"><paramref name="number1"/> position at which insertion ends</param>
         /// <returns>result of insertion</returns>
-        public static int InsertNumber(int firstNumber, int secondNumber, byte startPosition, byte endPosition)
+        public static int InsertNumber(int number1, int number2, byte startPosition, byte endPosition)
         {
             const byte BITS = sizeof(int) * 8;
 
@@ -32,13 +32,9 @@ namespace Homework
             }
             #endregion
 
-            var tail = (firstNumber << BITS - startPosition >> 1 & ~(1 << (BITS - 1))) >> (BITS - 1) - startPosition;
+            var mask = (2 << endPosition - startPosition) - 1 << startPosition;
+            return ~mask & number1 | number2 << startPosition & mask;
 
-            firstNumber = endPosition == BITS - 1 ? 0 : firstNumber >> endPosition + 1 << endPosition + 1;
-
-            secondNumber = endPosition < BITS - 1 ? (secondNumber << (BITS - 1) - (endPosition - startPosition) >> 1 & ~(1 << (BITS - 1))) >> (BITS - 2) - endPosition : secondNumber << (BITS - 1) - (endPosition - startPosition);
-
-            return firstNumber | secondNumber | tail;
         }
 
         /// <summary>
@@ -46,7 +42,7 @@ namespace Homework
         /// </summary>
         /// <param name="number">any positive integer number</param>
         /// <returns>the nearest number greater than <paramref name="number"/>, which consists of its digits or zero if there is no such number</returns>
-        public static uint FindNextBiggerNumber(uint number)
+        public static uint? FindNextBiggerNumber(uint number)
         {
             #region arguments validation
             if (number == 0)
@@ -72,7 +68,7 @@ namespace Homework
                 i--;
             }
 
-            return 0;
+            return null;
         }
 
         /// <summary>
@@ -81,7 +77,7 @@ namespace Homework
         /// <param name="number">any positive integer number</param>
         /// <param name="ticks">elapsed ticks</param>
         /// <returns>the nearest number greater than <paramref name="number"/>, which consists of its digits or zero if there is no such number</returns>
-        public static uint FindNextBiggerNumber(uint number, out long ticks)
+        public static uint? FindNextBiggerNumber(uint number, out long ticks)
         {
             var sw = Stopwatch.StartNew();
             var result = FindNextBiggerNumber(number);
@@ -114,13 +110,29 @@ namespace Homework
             var filtered = new System.Collections.Generic.List<int>();
             foreach (var number in numbers)
             {
-                if (number.ToString().Contains(digit.ToString()))
+                if (ContainsDigit(number))
                 {
                     filtered.Add(number);
                 }
             }
 
-            return filtered.ToArray(); ;
+            return filtered.ToArray();
+
+            #region ContainsDigit method
+            bool ContainsDigit(int number)
+            {
+                number = Math.Abs(number);
+                do
+                {
+                    if (number % 10 == digit)
+                    {
+                        return true;
+                    }
+                } while ((number /= 10) >= 1);
+
+                return false;
+            }
+            #endregion
         }
 
         /// <summary>
@@ -162,7 +174,7 @@ namespace Homework
                 xi = 1d / power * ((power - 1) * xi + number / Math.Pow(xi, power - 1));
             } while (Math.Abs(xi - x) > precision);
 
-            return Math.Round(xi, -(int)Math.Log10(precision));
+            return xi;
         }
     }
 }

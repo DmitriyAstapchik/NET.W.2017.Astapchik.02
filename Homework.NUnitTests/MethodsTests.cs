@@ -46,7 +46,7 @@ namespace Homework.NUnit.Tests
         #endregion
 
         #region FindNextBiggerNumber tests
-        [TestCase(5u, ExpectedResult = 0)]
+        [TestCase(5u, ExpectedResult = null)]
         [TestCase(12u, ExpectedResult = 21)]
         [TestCase(513u, ExpectedResult = 531)]
         [TestCase(2017u, ExpectedResult = 2071)]
@@ -55,13 +55,13 @@ namespace Homework.NUnit.Tests
         [TestCase(1234321u, ExpectedResult = 1241233)]
         [TestCase(1234126u, ExpectedResult = 1234162)]
         [TestCase(3456432u, ExpectedResult = 3462345)]
-        [TestCase(10u, ExpectedResult = 0)]
-        [TestCase(200u, ExpectedResult = 0)]
-        [TestCase(9876662u, ExpectedResult = 0)]
-        [TestCase(443322110u, ExpectedResult = 0)]
+        [TestCase(10u, ExpectedResult = null)]
+        [TestCase(200u, ExpectedResult = null)]
+        [TestCase(9876662u, ExpectedResult = null)]
+        [TestCase(443322110u, ExpectedResult = null)]
         [TestCase(537744220u, ExpectedResult = 570223447)]
         [TestCase(2809296711u, ExpectedResult = 2809297116)]
-        public uint FindNextBiggerNumberTestResult(uint number)
+        public uint? FindNextBiggerNumberTestResult(uint number)
         {
             return FindNextBiggerNumber(number);
         }
@@ -83,11 +83,11 @@ namespace Homework.NUnit.Tests
         #endregion
 
         #region FilterDigit tests
-        [TestCase(7, 1, 2, 3, 4, 5, 6, 7, 68, 69, 70, 15, 17, ExpectedResult = new int[] { 7, 70, 17 })]
+        [TestCase(7, 1, 2, 3, 4, 5, 6, -7, 68, 69, 70, 15, 17, ExpectedResult = new int[] { -7, 70, 17 })]
         [TestCase(7, new int[] { 1, 2, 3, 4, 5, 6, 7, 68, 69, 70, 15, 17 }, ExpectedResult = new int[] { 7, 70, 17 })]
         [TestCase(3, 134, ExpectedResult = new int[] { 134 })]
         [TestCase(4, -134, 4, 56, 4890, 903, 384794, 2212, -42, ExpectedResult = new int[] { -134, 4, 4890, 384794, -42 })]
-        [TestCase(0, -4242, -3005, 9233, 78430, 853, -10000, 1244, ExpectedResult = new int[] { -3005, 78430, -10000 })]
+        [TestCase(0, -4242, -3005, 0, 78430, 853, -10000, 1244, ExpectedResult = new int[] { -3005, 0, 78430, -10000 })]
         [TestCase(9, 99999, -85875, 956509, 656, -91193449, ExpectedResult = new int[] { 99999, 956509, -91193449 })]
         [TestCase(5, -230, 1298, 9929918, ExpectedResult = new int[0])]
         [TestCase(2, 22, 2, 182, 200, -82, -29, 222222, ExpectedResult = new int[] { 22, 2, 182, 200, -82, -29, 222222 })]
@@ -129,7 +129,7 @@ namespace Homework.NUnit.Tests
         [TestCase(0, 100, 0.000001, ExpectedResult = 0)]
         public double FindNthRootTest(double number, byte power, double precision)
         {
-            return FindNthRoot(number, power, precision);
+            return Math.Round(FindNthRoot(number, power, precision), (int)Math.Log10(1/precision));
         }
 
         [TestCase(-32.429, 0, 0.001)]
