@@ -20,7 +20,6 @@ namespace Homework
         {
             const byte BITS = sizeof(int) * 8;
 
-            #region arguments validation
             if (endPosition >= BITS || startPosition > BITS)
             {
                 throw new ArgumentOutOfRangeException($"Number of bit position must be less than {BITS}.");
@@ -30,11 +29,9 @@ namespace Homework
             {
                 throw new ArgumentException("Start position cannot be greater than end position.");
             }
-            #endregion
 
-            var mask = (2 << endPosition - startPosition) - 1 << startPosition;
+            var mask = ((2 << (endPosition - startPosition)) - 1) << startPosition;
             return ~mask & number1 | number2 << startPosition & mask;
-
         }
 
         /// <summary>
@@ -44,12 +41,10 @@ namespace Homework
         /// <returns>the nearest number greater than <paramref name="number"/>, which consists of its digits or zero if there is no such number</returns>
         public static uint? FindNextBiggerNumber(uint number)
         {
-            #region arguments validation
             if (number == 0)
             {
                 throw new ArgumentOutOfRangeException("Number must be positive.");
             }
-            #endregion
 
             char[] numberChars = number.ToString().ToCharArray();
             int i = numberChars.Length - 1;
@@ -65,6 +60,7 @@ namespace Homework
 
                     return uint.Parse(new string(numberChars, 0, i) + new string(tail));
                 }
+
                 i--;
             }
 
@@ -95,7 +91,6 @@ namespace Homework
         /// <returns>array of filtered numbers</returns>
         public static int[] FilterDigit(byte digit, params int[] numbers)
         {
-            #region arguments validation
             if (digit > 9)
             {
                 throw new ArgumentOutOfRangeException("digit", digit, "Parameter should be a digit.");
@@ -105,7 +100,6 @@ namespace Homework
             {
                 throw new ArgumentException("No numbers to filter.");
             }
-            #endregion
 
             var filtered = new System.Collections.Generic.List<int>();
             foreach (var number in numbers)
@@ -118,7 +112,6 @@ namespace Homework
 
             return filtered.ToArray();
 
-            #region ContainsDigit method
             bool ContainsDigit(int number)
             {
                 number = Math.Abs(number);
@@ -128,11 +121,11 @@ namespace Homework
                     {
                         return true;
                     }
-                } while ((number /= 10) >= 1);
+                }
+                while ((number /= 10) >= 1);
 
                 return false;
             }
-            #endregion
         }
 
         /// <summary>
@@ -144,7 +137,6 @@ namespace Homework
         /// <returns></returns>
         public static double FindNthRoot(double number, byte power, double precision)
         {
-            #region arguments validation
             if (power == 0)
             {
                 throw new ArgumentOutOfRangeException("sqrtpow", power, "Square root power must be a natural number.");
@@ -159,7 +151,6 @@ namespace Homework
             {
                 throw new ArgumentOutOfRangeException("precision", precision, "Precision can only have values greater than 0 and less than or equal to 1.");
             }
-            #endregion
 
             if (number == 0)
             {
@@ -171,8 +162,9 @@ namespace Homework
             do
             {
                 x = xi;
-                xi = 1d / power * ((power - 1) * xi + number / Math.Pow(xi, power - 1));
-            } while (Math.Abs(xi - x) > precision);
+                xi = 1d / power * (((power - 1) * xi) + (number / Math.Pow(xi, power - 1)));
+            }
+            while (Math.Abs(xi - x) > precision);
 
             return xi;
         }
