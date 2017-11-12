@@ -17,23 +17,22 @@ namespace Homework.NUnit.Tests
         [TestCase(-2130129, -99, 0, 31, ExpectedResult = -99)]
         public int InsertNumberTestResult(int first, int second, byte start, byte end)
         {
-            return InsertNumber(first,  second, start, end);
+            return InsertNumber(first, second, start, end);
         }
 
         [TestCase(1111, 3, 31, 31)]
         [TestCase(123456, 127, 26, 31)]
         public void InsertNumberTestAssertLess(int first, int second, byte start, byte end)
         {
-            var result = InsertNumber(first,  second, start, end);
+            var result = InsertNumber(first, second, start, end);
             Assert.Less(result, 0);
         }
-
 
         [TestCase(-1239525, 9847, 15, 31)]
         [TestCase(156463, -798427, 2, 22)]
         public void InsertNumberTestAssertGreater(int first, int second, byte start, byte end)
         {
-            var result = InsertNumber(first,  second, start, end);
+            var result = InsertNumber(first, second, start, end);
             Assert.Greater(result, 0);
         }
 
@@ -129,7 +128,7 @@ namespace Homework.NUnit.Tests
         [TestCase(0, 100, 0.000001, ExpectedResult = 0)]
         public double FindNthRootTest(double number, byte power, double precision)
         {
-            return Math.Round(FindNthRoot(number, power, precision), (int)Math.Log10(1/precision));
+            return Math.Round(FindNthRoot(number, power, precision), (int)Math.Log10(1 / precision));
         }
 
         [TestCase(-32.429, 0, 0.001)]
